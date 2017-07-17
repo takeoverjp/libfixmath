@@ -4,14 +4,19 @@ LIB =
 SRC = .
 INC =
 
+TARGET=/home/msyksphinz/work/freedom-e-sdk/work/build/riscv-gnu-toolchain/riscv64-unknown-elf/prefix/bin/riscv64-unknown-elf-
+
 #Compiler settings
-CPP = gcc
-CC = gcc
-AS = gcc
-LD = gcc
-AR = ar
-CPP_FLAGS = -O2 $(INC) -Wall -Wextra -c
-CC_FLAGS  = -O2 $(INC) -Wall -Wextra -c
+CPP = $(TARGET)gcc
+CC 	= $(TARGET)gcc
+AS 	= $(TARGET)gcc
+LD 	= $(TARGET)gcc
+AR 	= $(TARGET)ar
+
+DEFINES += FIXMATH_NO_CACHE
+
+CPP_FLAGS = -O2 $(INC) -Wall -Wextra -c -std=gnu11 -O3 -g  -g -march=rv32imac -mabi=ilp32 -mcmodel=medany $(addprefix -D, $(DEFINES))
+CC_FLAGS  = -O2 $(INC) -Wall -Wextra -c -std=gnu11 -O3 -g  -g -march=rv32imac -mabi=ilp32 -mcmodel=medany $(addprefix -D, $(DEFINES))
 AS_FLAGS  = $(CC_FLAGS) -D_ASSEMBLER_
 LD_FLAGS = -Wall
 

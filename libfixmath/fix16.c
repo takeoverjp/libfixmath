@@ -275,7 +275,15 @@ fix16_t fix16_smul(fix16_t inArg0, fix16_t inArg1)
 #if !defined(FIXMATH_OPTIMIZE_8BIT)
 #ifdef __GNUC__
 // Count leading zeros, using processor-specific instruction if available.
-#define clz(x) (__builtin_clzl(x) - (8 * sizeof(long) - 32))
+// #define clz(x) (__builtin_clzl(x) - (8 * sizeof(long) - 32))
+static uint8_t clz(uint32_t x)
+{
+	uint8_t result = 0;
+	if (x == 0) return 32;
+	while (!(x & 0xF0000000)) { result += 4; x <<= 4; }
+	while (!(x & 0x80000000)) { result += 1; x <<= 1; }
+	return result;
+}
 #else
 static uint8_t clz(uint32_t x)
 {

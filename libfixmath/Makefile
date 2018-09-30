@@ -16,8 +16,8 @@ AR 	= $(TARGET)ar
 DEFINES += FIXMATH_NO_CACHE
 DEFINES += FIXMATH_NO_64BIT
 
-CPP_FLAGS = -O2 $(INC) -mabi=lp64 -Wall -Wextra -c -std=gnu11 -O3 -g -mcmodel=medany $(addprefix -D, $(DEFINES))
-CC_FLAGS  = -O2 $(INC) -mabi=lp64 -Wall -Wextra -c -std=gnu11 -O3 -g -mcmodel=medany $(addprefix -D, $(DEFINES))
+CPP_FLAGS = -O2 $(INC) -Wall -Wextra -c -std=gnu11 -O3 -g -mcmodel=medany $(addprefix -D, $(DEFINES))
+CC_FLAGS  = -O2 $(INC) -Wall -Wextra -c -std=gnu11 -O3 -g -mcmodel=medany $(addprefix -D, $(DEFINES))
 AS_FLAGS  = $(CC_FLAGS) -D_ASSEMBLER_
 LD_FLAGS = -Wall
 
